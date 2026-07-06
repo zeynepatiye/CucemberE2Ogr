@@ -1,0 +1,33 @@
+Bilgisayar gelişimi
+işlemci -> İ3, İ5, İ7, İ9
+
+80 86 -> ilk işlemci
+80 286 -> 286 işlemci
+386
+486
+586 -> Pentium işlemci 4GHz  ısı - toz
+
+mikroişlemcinin içinde bir cok birim , esas işi yapan çekirdek bir kısım olan
+Aritmetic Logic Birim (ALU-çekirdek)  sayısını artırdılar, yani çekirdek(core)
+artırdılar.
+
+İ3  2 core -> aynı anda 2 iş yapan hale geliyor
+i3  4 core -> bu aynı anda 4 yapıyor
+i7  8 core -> bu aynı anda 8 iş yapabiliyor
+
+iş hatlarına her birine pipeline deniyor
+iş hatlarına Thread(iş hattı)
+
+Thread.Sleep(5000) -> bu hattı 5 sn beklet
+
+cucumber da driver STATİC olmak zorunda
+Her bir Thread e özel static tanımlayabilecek bir yöntem bulalım
+
+private static ThreadLocal<WebDriver> listDriver;
+
+getDriver()
+{
+  listDriver.set(driver);
+
+  return listDriver.get();
+}

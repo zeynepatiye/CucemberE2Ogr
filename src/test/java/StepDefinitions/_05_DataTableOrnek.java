@@ -2,6 +2,7 @@ package StepDefinitions;
 
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 import java.util.List;
@@ -35,4 +36,6 @@ public class _05_DataTableOrnek {
         for (List<String> li: listUserPass)
             System.out.println(li.get(0)+" "+li.get(1));
     }
+
+
 }

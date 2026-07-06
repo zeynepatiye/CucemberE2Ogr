@@ -23,3 +23,56 @@ https://www.youtube.com/watch?v=aU5daBh7YVA
     public static WebDriver getDriver() {
               Locale.setDefault(new Locale("EN"));
               System.setProperty("user.language", "EN");
+
+5- Her raporun ayrı olması için
+   Aşağıdaki kodu extent.properties e ekliyoruz
+
+          #FolderName
+          basefolder.name=Test Reports/TestReport
+          basefolder.datetimepattern=d-MMM-YY HH.mm.ss
+
+6- Rapora Screenshot eklenmesi için
+   a) extends.properties e aşağıdaki bölüm eklendi
+
+               #screenshot folder and src settings
+               screenshot.dir=test-output/screenshots/
+               screenshot.rel.path=../screenshots/
+
+   b)  Hooks a aşağıdaki eklendi
+          public void after(Scenario senaryo)
+
+                         if (senaryo.isFailed()){
+                              TakesScreenshot ts=((TakesScreenshot) GWD.getDriver());
+                              byte[] hafizadakiHali=ts.getScreenshotAs(OutputType.BYTES);
+                              senaryo.attach(hafizadakiHali, "image/png", "screenshot name");
+                          }
+
+7-  PDF Report için gerekli işlem
+     extends.properties e aşağıdaki bölüm eklendi
+
+                 #PDF Report
+                 extent.reporter.pdf.start=true
+                 extent.reporter.pdf.out=PdfReport.pdf
+
+
+8- Raporun sonuna istediğimiz açıklamalrı da ekleyebilirzi istersek
+     Runner class içine @AfterClass metodu açarak aşağıdaki şekilde ekleyebiliriz.
+
+     public class _07_ExtendReport extends AbstractTestNGCucumberTests {
+
+
+              @AfterClass
+              public  static void writeExtendReport()
+              {
+                      ExtentService.getInstance().setSystemInfo("Windows User Name", System.getProperty("user.name"));
+                      ExtentService.getInstance().setSystemInfo("Time Zone", System.getProperty("user.timezone"));
+                      ExtentService.getInstance().setSystemInfo("User Name", "İsmet Temur");
+                      ExtentService.getInstance().setSystemInfo("Application Name", "OpenCart");
+                      ExtentService.getInstance().setSystemInfo("Operating System Info", System.getProperty("os.name"));
+                      ExtentService.getInstance().setSystemInfo("Department", "QA");
+                      ExtentService.getInstance().setSystemInfo("Ek Satır", "Açıklama");
+                      ExtentService.getInstance().setSystemInfo("Ek Satır", "Açıklama");
+                      ExtentService.getInstance().setSystemInfo("Ek Satır", "Açıklama");
+                      ExtentService.getInstance().setSystemInfo("Ek Satır", "Açıklama");
+              }
+      }

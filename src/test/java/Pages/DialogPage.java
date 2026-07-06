@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.time.Duration;
+import java.util.List;
 
 public class DialogPage extends ParentPage{
 
@@ -46,6 +47,16 @@ public class DialogPage extends ParentPage{
     @FindBy(id="input-lastname")
     public WebElement inputLastname;
 
+    @FindBy(name = "search")
+    public WebElement searchBox;
+
+    @FindBy(css = "[class='btn btn-default btn-lg']")
+    public WebElement srcBtn;
+
+    @FindBy(css = "[class='caption'] a")
+    public List<WebElement> srcNameList;
+
+
     public WebElement getWebElement(String strElement)
     {
         switch (strElement)
@@ -57,6 +68,8 @@ public class DialogPage extends ParentPage{
             case "submitBtn" : return this.submitBtn;
             case "subYes" : return this.subYes;
             case "subNo" : return this.subNo;
+            case "searchBox" : return this.searchBox;
+            case "srcBtn" : return this.srcBtn;
             default: return null;
         }
     }
